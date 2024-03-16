@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://dnrqxwb015iq3"]
+[gd_scene load_steps=9 format=3 uid="uid://dnrqxwb015iq3"]
 
 [ext_resource type="Script" path="res://scripts/init.gd" id="1_udabs"]
+[ext_resource type="ArrayMesh" uid="uid://0a8h3i34g5m0" path="res://Assets/Table/Table.obj" id="2_u3ucr"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_cqodi"]
 
@@ -63,3 +64,7 @@ environment = SubResource("Environment_3hkn3")
 [node name="Floor" type="MeshInstance3D" parent="Scene"]
 mesh = SubResource("PlaneMesh_v6bxa")
 skeleton = NodePath("../..")
+
+[node name="Table" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.370967, 0, 1.56414)
+mesh = ExtResource("2_u3ucr")
