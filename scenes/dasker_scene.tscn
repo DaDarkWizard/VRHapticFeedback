@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://dnrqxwb015iq3"]
+[gd_scene load_steps=13 format=3 uid="uid://dnrqxwb015iq3"]
 
 [ext_resource type="Script" path="res://scripts/init.gd" id="1_udabs"]
 [ext_resource type="Script" path="res://scripts/player_controller.gd" id="2_bwwld"]
 [ext_resource type="ArrayMesh" uid="uid://0a8h3i34g5m0" path="res://Assets/Table/Table.obj" id="2_u3ucr"]
+[ext_resource type="Material" uid="uid://rwfrc1fdcjsj" path="res://addons/godot-xr-tools/hands/materials/caucasian_hands_realistic.tres" id="3_fp8gd"]
 [ext_resource type="Script" path="res://scripts/table_controller.gd" id="4_go3dx"]
 [ext_resource type="Script" path="res://scripts/text_display.gd" id="4_wasnm"]
 
@@ -40,15 +41,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0)
 mesh = SubResource("CapsuleMesh_cqodi")
 skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("3_fp8gd")
 
 [node name="left_hand" type="XRController3D" parent="player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
-visible = false
 tracker = &"left_hand"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="player/left_hand"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 mesh = SubResource("PrismMesh_q1bqi")
+surface_material_override/0 = ExtResource("3_fp8gd")
 
 [node name="right_hand" type="XRController3D" parent="player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
@@ -57,8 +59,7 @@ tracker = &"right_hand"
 [node name="MeshInstance3D" type="MeshInstance3D" parent="player/right_hand"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 mesh = SubResource("TorusMesh_clchv")
-
-[node name="OpenXRHand" type="OpenXRHand" parent="player"]
+surface_material_override/0 = ExtResource("3_fp8gd")
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 35, 0)
