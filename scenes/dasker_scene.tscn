@@ -1,7 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dnrqxwb015iq3"]
+[gd_scene load_steps=12 format=3 uid="uid://dnrqxwb015iq3"]
 
 [ext_resource type="Script" path="res://scripts/init.gd" id="1_udabs"]
+[ext_resource type="Script" path="res://scripts/player_controller.gd" id="2_bwwld"]
 [ext_resource type="ArrayMesh" uid="uid://0a8h3i34g5m0" path="res://Assets/Table/Table.obj" id="2_u3ucr"]
+[ext_resource type="Script" path="res://scripts/table_controller.gd" id="4_go3dx"]
+[ext_resource type="Script" path="res://scripts/text_display.gd" id="4_wasnm"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_cqodi"]
 
@@ -28,6 +31,7 @@ volumetric_fog_detail_spread = 6.0
 script = ExtResource("1_udabs")
 
 [node name="player" type="XROrigin3D" parent="."]
+script = ExtResource("2_bwwld")
 
 [node name="camera" type="XRCamera3D" parent="player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
@@ -70,3 +74,13 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.370967, 1.22192, -1.74199)
 mesh = ExtResource("2_u3ucr")
 skeleton = NodePath("../..")
+script = ExtResource("4_go3dx")
+
+[node name="Label3D" type="Label3D" parent="Scene/Table"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0668814)
+text = "Test"
+script = ExtResource("4_wasnm")
+
+[connection signal="button_pressed" from="player/right_hand" to="player" method="_on_right_hand_button_pressed"]
+[connection signal="button_pressed" from="player/right_hand" to="Scene/Table" method="_on_right_hand_button_pressed"]
+[connection signal="button_pressed" from="player/right_hand" to="Scene/Table/Label3D" method="_on_right_hand_button_pressed"]
