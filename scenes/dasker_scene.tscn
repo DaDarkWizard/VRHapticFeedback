@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://dnrqxwb015iq3"]
+[gd_scene load_steps=18 format=3 uid="uid://dnrqxwb015iq3"]
 
 [ext_resource type="Script" path="res://scripts/init.gd" id="1_udabs"]
 [ext_resource type="Script" path="res://scripts/player_controller.gd" id="2_bwwld"]
 [ext_resource type="ArrayMesh" uid="uid://0a8h3i34g5m0" path="res://Assets/Table/Table.obj" id="2_u3ucr"]
 [ext_resource type="Script" path="res://scripts/table_controller.gd" id="4_go3dx"]
 [ext_resource type="Script" path="res://scripts/text_display.gd" id="4_wasnm"]
+[ext_resource type="ArrayMesh" uid="uid://cyiaayyvi6a3" path="res://Assets/Lamp/Lamp.obj" id="6_fjxos"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_cqodi"]
 
@@ -25,7 +26,21 @@ reflected_light_source = 2
 volumetric_fog_emission_energy = 514.57
 volumetric_fog_detail_spread = 6.0
 
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6c85l"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_erf0l"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v13r6"]
+albedo_color = Color(0.027451, 0.027451, 0.00392157, 1)
+albedo_texture = SubResource("NoiseTexture2D_6c85l")
+roughness_texture = SubResource("NoiseTexture2D_erf0l")
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_v6bxa"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_i372i"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0p1ai"]
+transparency = 1
 
 [node name="DaskerScene" type="Node3D"]
 script = ExtResource("1_udabs")
@@ -67,6 +82,7 @@ environment = SubResource("Environment_3hkn3")
 
 [node name="Floor" type="MeshInstance3D" parent="Scene"]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_v13r6")
 mesh = SubResource("PlaneMesh_v6bxa")
 skeleton = NodePath("../..")
 
@@ -80,6 +96,30 @@ script = ExtResource("4_go3dx")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0668814)
 text = "Test"
 script = ExtResource("4_wasnm")
+
+[node name="Lamp" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -2.60152, 0, -2.29702)
+mesh = ExtResource("6_fjxos")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Scene/Lamp"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.4, 0, 0, 1.39131)
+mesh = SubResource("BoxMesh_i372i")
+surface_material_override/0 = SubResource("StandardMaterial3D_0p1ai")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Scene/Lamp/MeshInstance3D"]
+
+[node name="Lamp2" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1.62175, 0.0639262, -0.284029)
+mesh = ExtResource("6_fjxos")
+skeleton = NodePath("../Lamp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Scene/Lamp2"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.4, 0, 0, 1.39131)
+mesh = SubResource("BoxMesh_i372i")
+surface_material_override/0 = SubResource("StandardMaterial3D_0p1ai")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Scene/Lamp2/MeshInstance3D"]
 
 [connection signal="button_pressed" from="player/right_hand" to="player" method="_on_right_hand_button_pressed"]
 [connection signal="button_pressed" from="player/right_hand" to="Scene/Table" method="_on_right_hand_button_pressed"]

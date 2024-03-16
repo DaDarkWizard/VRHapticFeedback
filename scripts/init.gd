@@ -12,5 +12,16 @@ func _ready():
 
 		# Change our main viewport to output to the HMD
 		get_viewport().use_xr = true
+		
+		#
+		#if xr_interface.is_passthrough_supported():
+		#	if xr_interface.start_passthrough():
+		#		var modes = xr_interface.get_supported_environment_blend_modes()
+		#		if xr_interface.XR_ENV_BLEND_MODE_ALPHA_BLEND in modes:
+		#			xr_interface.set_environment_blend_mode(xr_interface.XR_ENV_BLEND_MODE_ALPHA_BLEND)
+
+
+		get_viewport().transparent_bg = true
+		
 	else:
 		print("OpenXR not initialized, please check if your headset is connected")
