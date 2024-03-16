@@ -43,6 +43,7 @@ skeleton = NodePath("../..")
 
 [node name="left_hand" type="XRController3D" parent="player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
+visible = false
 tracker = &"left_hand"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="player/left_hand"]
@@ -56,6 +57,8 @@ tracker = &"right_hand"
 [node name="MeshInstance3D" type="MeshInstance3D" parent="player/right_hand"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 mesh = SubResource("TorusMesh_clchv")
+
+[node name="OpenXRHand" type="OpenXRHand" parent="player"]
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 35, 0)
