@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dnrqxwb015iq3"]
+[gd_scene load_steps=21 format=3 uid="uid://dnrqxwb015iq3"]
 
 [ext_resource type="Script" path="res://scripts/init.gd" id="1_udabs"]
 [ext_resource type="Script" path="res://scripts/player_controller.gd" id="2_bwwld"]
@@ -13,25 +13,39 @@
 
 [sub_resource type="TorusMesh" id="TorusMesh_clchv"]
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1g1vh"]
+sky_top_color = Color(0.266667, 0.454902, 0.694118, 1)
+sky_horizon_color = Color(0.508349, 0.804793, 0.97122, 1)
+ground_bottom_color = Color(0.054902, 0.470588, 0, 1)
+ground_horizon_color = Color(0, 0.596078, 0.0117647, 1)
+
 [sub_resource type="Sky" id="Sky_gk6bh"]
+sky_material = SubResource("ProceduralSkyMaterial_1g1vh")
 
 [sub_resource type="Environment" id="Environment_3hkn3"]
 background_mode = 2
-background_energy_multiplier = 10.03
 sky = SubResource("Sky_gk6bh")
 ambient_light_source = 3
-ambient_light_color = Color(0.898039, 0.439216, 0, 1)
 ambient_light_sky_contribution = 0.8
 reflected_light_source = 2
+glow_blend_mode = 0
 volumetric_fog_emission_energy = 514.57
 volumetric_fog_detail_spread = 6.0
 
+[sub_resource type="Gradient" id="Gradient_cfl1a"]
+interpolation_color_space = 1
+colors = PackedColorArray(0.246223, 0.619052, 0.723041, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_65i3p"]
+
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6c85l"]
+color_ramp = SubResource("Gradient_cfl1a")
+noise = SubResource("FastNoiseLite_65i3p")
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_erf0l"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v13r6"]
-albedo_color = Color(0.027451, 0.027451, 0.00392157, 1)
+albedo_color = Color(0.0588235, 0.470588, 0.00784314, 1)
 albedo_texture = SubResource("NoiseTexture2D_6c85l")
 roughness_texture = SubResource("NoiseTexture2D_erf0l")
 
@@ -41,6 +55,11 @@ roughness_texture = SubResource("NoiseTexture2D_erf0l")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0p1ai"]
 transparency = 1
+emission_enabled = true
+emission = Color(0.717647, 0.729412, 0.482353, 1)
+emission_energy_multiplier = 2.51
+clearcoat_enabled = true
+clearcoat_roughness = 0.23
 
 [node name="DaskerScene" type="Node3D"]
 script = ExtResource("1_udabs")
