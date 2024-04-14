@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://okwang7o8qdd"
+path="res://.godot/imported/Roomscale.obj-c43fee6681c3ea4c8a84a856b82b441f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Roomscale.obj-c43fee6681c3ea4c8a84a856b82b441f.mesh"]
+
+source_file="res://XRHandtrackingTools/TrackedHands/Roomscale/Roomscale.obj"
+dest_files=["res://.godot/imported/Roomscale.obj-c43fee6681c3ea4c8a84a856b82b441f.mesh", "res://.godot/imported/Roomscale.obj-c43fee6681c3ea4c8a84a856b82b441f.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
