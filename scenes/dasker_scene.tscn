@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://ds2cu3peuunlr"]
+[gd_scene load_steps=29 format=3 uid="uid://ds2cu3peuunlr"]
 
 [ext_resource type="PackedScene" uid="uid://d3erlk2vajf4k" path="res://XRHandtrackingTools/TrackedHands/tracked_hand_left.tscn" id="1_7nhl3"]
 [ext_resource type="PackedScene" uid="uid://v4wv8mgicjyc" path="res://XRHandtrackingTools/TrackedHands/tracked_hand_right.tscn" id="2_fj7bq"]
@@ -9,7 +9,9 @@
 [ext_resource type="ArrayMesh" uid="uid://cyiaayyvi6a3" path="res://Assets/Lamp/Lamp.obj" id="6_fjxos"]
 [ext_resource type="Texture2D" uid="uid://dvbkm54qmqu7k" path="res://Assets/folding-table/source/textures/Folding Table_normal.png" id="6_ts8ab"]
 [ext_resource type="Texture2D" uid="uid://cntfjsj3mrx7e" path="res://Assets/folding-table/source/textures/Folding Table_roughness.jpg" id="7_3ikxv"]
-[ext_resource type="ArrayMesh" uid="uid://dk6xlpbw34je1" path="res://Assets/Roomscale/Roomscale.obj" id="10_nq3f8"]
+[ext_resource type="ArrayMesh" uid="uid://diypwd6pv7ndd" path="res://Assets/New Assets/NewRoom/NewRoom.obj" id="10_ysv37"]
+[ext_resource type="ArrayMesh" uid="uid://dtku4pmr41n5a" path="res://Assets/New Assets/NewChair/NewChair.obj" id="11_8bjxc"]
+[ext_resource type="ArrayMesh" uid="uid://dmkk32uu421i5" path="res://Assets/New Assets/NewTable/NewTable.obj" id="12_6xljh"]
 [ext_resource type="PackedScene" uid="uid://clc5dre31iskm" path="res://addons/godot-xr-tools/xr/start_xr.tscn" id="13_7gu1i"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1g1vh"]
@@ -228,7 +230,7 @@ environment = SubResource("Environment_3hkn3")
 [node name="Scene" type="Node" parent="."]
 
 [node name="Folding_Table" type="MeshInstance3D" parent="Scene"]
-transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0.197021, 0.409652, -1.64605)
+transform = Transform3D(-4.37114e-06, 0, -100, 0, 100, 0, 100, 0, -4.37114e-06, 4.51571, 0.409652, 0.0546825)
 mesh = SubResource("ArrayMesh_600ns")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_ps2m4")
@@ -246,7 +248,7 @@ mesh = SubResource("PlaneMesh_v6bxa")
 skeleton = NodePath("../..")
 
 [node name="Lamp" type="MeshInstance3D" parent="Scene"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -2.60152, 0, -2.29702)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -3.53444, 0, -2.5389)
 mesh = ExtResource("6_fjxos")
 skeleton = NodePath("../..")
 
@@ -258,7 +260,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_0p1ai")
 [node name="OmniLight3D" type="OmniLight3D" parent="Scene/Lamp/MeshInstance3D"]
 
 [node name="Lamp2" type="MeshInstance3D" parent="Scene"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1.62175, 0.0639262, -0.284029)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1.61222, 0.0639257, 1.29334)
 mesh = ExtResource("6_fjxos")
 skeleton = NodePath("../Lamp")
 
@@ -270,10 +272,190 @@ surface_material_override/0 = SubResource("StandardMaterial3D_0p1ai")
 [node name="OmniLight3D" type="OmniLight3D" parent="Scene/Lamp2/MeshInstance3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Scene"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.81172, -1.53985, 0.412265)
-mesh = ExtResource("10_nq3f8")
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+mesh = ExtResource("10_ysv37")
+
+[node name="NewChair" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -2.8867, 0.51135, 2.03927)
+mesh = ExtResource("11_8bjxc")
+
+[node name="NewChair2" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -2.33768, 0.51135, 2.03927)
+mesh = ExtResource("11_8bjxc")
+
+[node name="NewChair3" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -1.76113, 0.51135, 2.03927)
+mesh = ExtResource("11_8bjxc")
+
+[node name="NewChair4" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -0.392247, 0.51135, 2.03927)
+mesh = ExtResource("11_8bjxc")
+
+[node name="NewChair5" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 0.15678, 0.51135, 2.03927)
+mesh = ExtResource("11_8bjxc")
+
+[node name="NewChair6" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 0.733326, 0.51135, 2.03927)
+mesh = ExtResource("11_8bjxc")
+
+[node name="NewTable" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -0.134544, 0.75, 1.807)
+mesh = ExtResource("12_6xljh")
+
+[node name="NewChair7" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -0.997864, 0.51135, 2.03927)
+mesh = ExtResource("11_8bjxc")
+
+[node name="NewChair8" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 2.15622, 0.51135, 2.03927)
+mesh = ExtResource("11_8bjxc")
+
+[node name="NewChair9" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 2.70525, 0.51135, 2.03927)
+mesh = ExtResource("11_8bjxc")
+
+[node name="NewChair10" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 3.2818, 0.51135, 2.03927)
+mesh = ExtResource("11_8bjxc")
+
+[node name="NewTable2" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 2.41393, 0.75, 1.807)
+mesh = ExtResource("12_6xljh")
+
+[node name="NewChair11" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 1.55061, 0.51135, 2.03927)
+mesh = ExtResource("11_8bjxc")
+
+[node name="NewChair12" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -2.8867, 0.51135, 0.463794)
+mesh = ExtResource("11_8bjxc")
+
+[node name="NewChair13" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -2.33768, 0.51135, 0.463794)
+mesh = ExtResource("11_8bjxc")
+
+[node name="NewChair14" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -1.76113, 0.51135, 0.463794)
+mesh = ExtResource("11_8bjxc")
+
+[node name="NewTable3" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -2.629, 0.75, 0.231525)
+mesh = ExtResource("12_6xljh")
+
+[node name="NewChair15" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -3.49232, 0.51135, 0.463794)
+mesh = ExtResource("11_8bjxc")
+
+[node name="NewChair16" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -0.354223, 0.51135, 0.4619)
+mesh = ExtResource("11_8bjxc")
+
+[node name="NewChair17" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 0.194804, 0.51135, 0.4619)
+mesh = ExtResource("11_8bjxc")
+
+[node name="NewChair18" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 0.77135, 0.51135, 0.4619)
+mesh = ExtResource("11_8bjxc")
+
+[node name="NewTable4" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -0.0965202, 0.75, 0.22963)
+mesh = ExtResource("12_6xljh")
+
+[node name="NewChair19" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -0.959841, 0.51135, 0.4619)
+mesh = ExtResource("11_8bjxc")
+
+[node name="NewChair20" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 2.10577, 0.51135, 0.455366)
+mesh = ExtResource("11_8bjxc")
+
+[node name="NewChair21" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 2.6548, 0.51135, 0.455366)
+mesh = ExtResource("11_8bjxc")
+
+[node name="NewChair22" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 3.23135, 0.51135, 0.455366)
+mesh = ExtResource("11_8bjxc")
+
+[node name="NewTable5" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 2.36348, 0.75, 0.223096)
+mesh = ExtResource("12_6xljh")
+
+[node name="NewChair23" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 1.50015, 0.51135, 0.455366)
+mesh = ExtResource("11_8bjxc")
+
+[node name="NewChair24" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -2.8867, 0.51135, -1.10064)
+mesh = ExtResource("11_8bjxc")
+
+[node name="NewChair25" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -2.33768, 0.51135, -1.10064)
+mesh = ExtResource("11_8bjxc")
+
+[node name="NewChair26" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -1.76113, 0.51135, -1.10064)
+mesh = ExtResource("11_8bjxc")
+
+[node name="NewTable6" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -2.629, 0.75, -1.33291)
+mesh = ExtResource("12_6xljh")
+
+[node name="NewChair27" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -3.49232, 0.51135, -1.10064)
+mesh = ExtResource("11_8bjxc")
+
+[node name="NewChair28" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -0.423407, 0.51135, -1.1014)
+mesh = ExtResource("11_8bjxc")
+
+[node name="NewChair29" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 0.125621, 0.51135, -1.1014)
+mesh = ExtResource("11_8bjxc")
+
+[node name="NewChair30" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 0.702166, 0.51135, -1.1014)
+mesh = ExtResource("11_8bjxc")
+
+[node name="NewTable7" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -0.165704, 0.75, -1.33367)
+mesh = ExtResource("12_6xljh")
+
+[node name="NewChair31" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -1.02902, 0.51135, -1.1014)
+mesh = ExtResource("11_8bjxc")
+
+[node name="NewChair32" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 2.03343, 0.51135, -1.10984)
+mesh = ExtResource("11_8bjxc")
+
+[node name="NewChair33" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 2.58246, 0.51135, -1.10984)
+mesh = ExtResource("11_8bjxc")
+
+[node name="NewChair34" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 3.159, 0.51135, -1.10984)
+mesh = ExtResource("11_8bjxc")
+
+[node name="NewTable8" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 2.29113, 0.75, -1.34211)
+mesh = ExtResource("12_6xljh")
+
+[node name="NewChair35" type="MeshInstance3D" parent="Scene"]
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 1.42781, 0.51135, -1.10984)
+mesh = ExtResource("11_8bjxc")
 
 [node name="StartXR" parent="." instance=ExtResource("13_7gu1i")]
+
+[node name="NewTable" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -2.629, 0.75, 1.807)
+mesh = ExtResource("12_6xljh")
+
+[node name="NewChair" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -3.49232, 0.51135, 2.03927)
+mesh = ExtResource("11_8bjxc")
 
 [connection signal="new_pose" from="XROrigin3D/TrackedHandLeft/Skeleton3D/XRPickupFunction/HandPoseMatcher" to="Scene/Folding_Table" method="_on_left_hand_pose_matcher_new_pose"]
 [connection signal="new_pose" from="XROrigin3D/TrackedHandRight/Skeleton3D/XRPickupFunction/HandPoseMatcher" to="Scene/Folding_Table" method="_on_right_hand_pose_matcher_new_pose"]
