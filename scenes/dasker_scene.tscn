@@ -121,6 +121,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
 [node name="XRPickupFunction" parent="XROrigin3D/TrackedHandLeft/Skeleton3D" index="1"]
 transform = Transform3D(0.0836061, -0.97618, 0.200207, 0.996362, 0.0785602, -0.0330308, 0.0165158, 0.20224, 0.979197, -0.00943292, 0.00825829, -0.0503987)
 
+[node name="HandPoseMatcher" parent="XROrigin3D/TrackedHandLeft/Skeleton3D/XRPickupFunction" index="0" node_paths=PackedStringArray("skeleton")]
+skeleton = NodePath("../..")
+
+[node name="PoseName" parent="XROrigin3D/TrackedHandLeft/Skeleton3D/XRPickupFunction" index="2"]
+visible = false
+
 [node name="Physical Bone Thumb_Proximal_L" parent="XROrigin3D/TrackedHandLeft/Skeleton3D" index="2"]
 transform = Transform3D(0.938213, -0.077999, -0.337155, 0.0187491, 0.984294, -0.175538, 0.345551, 0.15837, 0.92494, 0.0283173, 0.0543736, -0.0544159)
 
@@ -167,6 +173,9 @@ transform = Transform3D(-0.244294, -0.749373, -0.615435, 0.941219, -0.335934, 0.
 
 [node name="XRPickupFunction" parent="XROrigin3D/TrackedHandRight/Skeleton3D" index="1"]
 transform = Transform3D(0.0836061, 0.97618, -0.200206, -0.0165157, 0.20224, 0.979197, 0.996362, -0.0785603, 0.0330307, 0.00943317, -0.0503988, -0.00825833)
+
+[node name="HandPoseMatcher" parent="XROrigin3D/TrackedHandRight/Skeleton3D/XRPickupFunction" index="0" node_paths=PackedStringArray("skeleton")]
+skeleton = NodePath("../..")
 
 [node name="Thumb_Proximal_R" parent="XROrigin3D/TrackedHandRight/Skeleton3D" index="2"]
 transform = Transform3D(0.938213, 0.0779998, 0.337155, -0.345551, 0.158372, 0.924939, 0.0187493, -0.984294, 0.175539, -0.0283179, -0.0544153, -0.0543731)
@@ -266,7 +275,11 @@ mesh = ExtResource("10_nq3f8")
 
 [node name="StartXR" parent="." instance=ExtResource("13_7gu1i")]
 
+[connection signal="new_pose" from="XROrigin3D/TrackedHandLeft/Skeleton3D/XRPickupFunction/HandPoseMatcher" to="Scene/Folding_Table" method="_on_left_hand_pose_matcher_new_pose"]
+[connection signal="new_pose" from="XROrigin3D/TrackedHandRight/Skeleton3D/XRPickupFunction/HandPoseMatcher" to="Scene/Folding_Table" method="_on_right_hand_pose_matcher_new_pose"]
 [connection signal="moved" from="Scene/Folding_Table" to="Scene/Folding_Table/Label3D" method="_on_folding_table_moved"]
 
 [editable path="XROrigin3D/TrackedHandLeft"]
+[editable path="XROrigin3D/TrackedHandLeft/Skeleton3D/XRPickupFunction"]
 [editable path="XROrigin3D/TrackedHandRight"]
+[editable path="XROrigin3D/TrackedHandRight/Skeleton3D/XRPickupFunction"]
