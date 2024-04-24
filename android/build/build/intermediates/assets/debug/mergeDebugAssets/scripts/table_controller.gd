@@ -39,5 +39,5 @@ func check_table_teleport():
 			right_position.z + left_position.z / 2.0
 		);
 		
-		self.global_position = average_position + Vector3(0, -0.4, 0)
+		self.global_position = average_position + Vector3(1.45, -0.81, -0.25)
 		moved.emit(self.global_position)
