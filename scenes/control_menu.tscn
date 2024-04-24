@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://bc7tp8jcfo01x"]
+
+[ext_resource type="Script" path="res://scripts/control_menu.gd" id="1_6c2c8"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xnkq2"]
+size = Vector2(0.2, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ncwjn"]
+albedo_color = Color(0.054902, 0.0784314, 0.109804, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cui18"]
+size = Vector3(0.0497803, 0.0363281, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pem7h"]
+albedo_color = Color(0.415686, 0.415686, 0.415686, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4wu4q"]
+material = SubResource("StandardMaterial3D_pem7h")
+size = Vector3(0.05, 0.036, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cq24s"]
+size = Vector3(0.05, 0.036, 0.1)
+
+[node name="ControlMenu" type="Node3D"]
+transform = Transform3D(0.999931, -0.00382262, -0.0112063, 0.0053337, 0.990408, 0.138074, 0.010571, -0.138123, 0.990359, -0.00297039, 0.0748943, 0.0885274)
+script = ExtResource("1_6c2c8")
+
+[node name="Backdrop" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 2.32831e-10, 9.31323e-10, -1.16415e-10, 1, 1.49012e-08, 0, -1.49012e-08, 1, 0, 0, 0)
+mesh = SubResource("PlaneMesh_xnkq2")
+surface_material_override/0 = SubResource("StandardMaterial3D_ncwjn")
+
+[node name="ControlLabel" type="Label3D" parent="."]
+transform = Transform3D(-4.47035e-08, -1, 2.32831e-10, 2.98023e-08, -1.16415e-10, 1, -1, 4.47035e-08, 1.49012e-08, -0.00815751, 0.01, 0.126978)
+pixel_size = 0.0025
+text = "Calibrate"
+font_size = 11
+outline_size = 5
+
+[node name="Button" type="Area3D" parent="."]
+
+[node name="Collider" type="CollisionShape3D" parent="Button"]
+transform = Transform3D(1, 2.16301e-06, 3.21868e-06, -2.16301e-06, 1, 1.49011e-06, -3.21868e-06, -1.49012e-06, 1, 0.0532705, 0.020188, 0.129272)
+shape = SubResource("BoxShape3D_cui18")
+
+[node name="ButtonMesh1" type="MeshInstance3D" parent="Button"]
+transform = Transform3D(1, 1.5134e-09, 8.3819e-09, -1.16415e-10, 1, 2.98023e-08, 0, -1.3411e-07, 1, 0.0529282, 0.0195702, 0.129484)
+mesh = SubResource("BoxMesh_4wu4q")
+
+[node name="ButtonMesh2" type="MeshInstance3D" parent="Button"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.053, 0.02, 0.129)
+visible = false
+mesh = SubResource("BoxMesh_cq24s")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="body_entered" from="Button" to="." method="body_entered"]
+[connection signal="timeout" from="Timer" to="." method="timer_end"]

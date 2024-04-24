@@ -3,22 +3,40 @@ extends Node3D
 var lefton = false;
 var righton = false;
 
+var leftfist = false;
+var rightfist = false;
+
 var mode = 0;
+
+func on_calibrate_pressed():
+	mode = 0;
 
 func _on_left_hand_pose_matcher_new_pose(previous_pose, pose):
 	if pose == "OK":
 		lefton = true;
+		leftfist = false;
+		calibrate_hands();
+	elif pose == "Fist":
+		lefton = false;
+		leftfist = true;
 		calibrate_hands();
 	else:
 		lefton = false;
+		leftfist = false;
 
 
 func _on_right_hand_pose_matcher_new_pose(previous_pose, pose):
 	if pose == "OK":
 		righton = true;
+		rightfist = false;
+		calibrate_hands();
+	elif pose == "Fist":
+		righton = false;
+		rightfist = true;
 		calibrate_hands();
 	else:
 		righton = false;
+		rightfist = false;
 
 func calibrate_hands():
 	if lefton and righton:
@@ -28,21 +46,23 @@ func calibrate_hands():
 		elif mode == 1:
 			calibrate_point_2();
 			mode += 1;
+	if leftfist and rightfist:
+		mode = 0;
 
 
 func calibrate_point_1():
 	
 	# Get the position of the left and right hands.
 	var right_position = get_tree().current_scene\
-		.get_child(0).get_child(2).global_position
+		.get_child(0).get_child(2).get_child(0).get_child(1).global_position
 	var left_position = get_tree().current_scene\
-		.get_child(0).get_child(1).global_position
+		.get_child(0).get_child(1).get_child(0).get_child(1).global_position
 	
 	# Get the center point between the hands.
 	var average_position = Vector3(
-		right_position.x + left_position.x / 2.0,
-		right_position.y + left_position.y / 2.0,
-		right_position.z + left_position.z / 2.0
+		(right_position.x + left_position.x) / 2.0,
+		(right_position.y + left_position.y) / 2.0,
+		(right_position.z + left_position.z) / 2.0
 	);
 	
 	# Set the first calibration point.
@@ -65,8 +85,8 @@ func calibrate_point_1():
 	
 	# This is from the previous one-stop orientation method, but it's not
 	# really hurting anyone.
-	self.global_rotation = Vector3(0, 0, 0)
-	
+	#self.global_rotation = Vector3(0, 0, 0)
+	$Mover.transform.basis = Basis();
 	# Rotate the scene.
 	$Mover.global_transform = $Mover.global_transform.rotated(Vector3(0, 1, 0), rot_amount)
 	$Mover.global_transform = $Mover.global_transform.rotated(Vector3(0, 1, 0), PI)
@@ -80,15 +100,15 @@ func calibrate_point_1():
 func calibrate_point_2():
 	# Get the position of the left and right hands.
 	var right_position = get_tree().current_scene\
-		.get_child(0).get_child(2).global_position
+		.get_child(0).get_child(2).get_child(0).get_child(1).global_position
 	var left_position = get_tree().current_scene\
-		.get_child(0).get_child(1).global_position
+		.get_child(0).get_child(1).get_child(0).get_child(1).global_position
 		
 	# Get the center point between the hands.
 	var average_position = Vector3(
-		right_position.x + left_position.x / 2.0,
-		right_position.y + left_position.y / 2.0,
-		right_position.z + left_position.z / 2.0
+		(right_position.x + left_position.x) / 2.0,
+		(right_position.y + left_position.y) / 2.0,
+		(right_position.z + left_position.z) / 2.0
 	);
 	
 	# Set the second calibration point.
@@ -110,7 +130,7 @@ func calibrate_point_2():
 		rot_amount = -rot_amount;
 	
 	# Reset the room orientation before rotating.
-	self.global_rotation = Vector3(0, 0, 0)
+	$Mover.transform.basis = Basis();
 	
 	# Rotate the scene.
 	$Mover.global_transform = $Mover.global_transform.rotated(Vector3(0, 1, 0), rot_amount)

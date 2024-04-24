@@ -1,7 +1,8 @@
-[gd_scene load_steps=30 format=3 uid="uid://ds2cu3peuunlr"]
+[gd_scene load_steps=37 format=3 uid="uid://ds2cu3peuunlr"]
 
 [ext_resource type="PackedScene" uid="uid://d3erlk2vajf4k" path="res://XRHandtrackingTools/TrackedHands/tracked_hand_left.tscn" id="1_7nhl3"]
 [ext_resource type="PackedScene" uid="uid://v4wv8mgicjyc" path="res://XRHandtrackingTools/TrackedHands/tracked_hand_right.tscn" id="2_fj7bq"]
+[ext_resource type="PackedScene" uid="uid://bc7tp8jcfo01x" path="res://scenes/control_menu.tscn" id="2_krmbv"]
 [ext_resource type="Script" path="res://scripts/SceneCalibrator.gd" id="3_a65ak"]
 [ext_resource type="Script" path="res://scripts/table_controller.gd" id="4_go3dx"]
 [ext_resource type="Texture2D" uid="uid://cv5ui2wgpc1ug" path="res://Assets/folding-table/source/textures/Folding Table_albedo.jpg" id="4_tj6ft"]
@@ -85,22 +86,25 @@ ao_texture = ExtResource("5_c24fp")
 
 [sub_resource type="Gradient" id="Gradient_cfl1a"]
 interpolation_color_space = 1
-colors = PackedColorArray(0.246223, 0.619052, 0.723041, 1, 1, 1, 1, 1)
+colors = PackedColorArray(0.231373, 0.105882, 0, 1, 0.898039, 0.87451, 0.678431, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_65i3p"]
+frequency = 0.3123
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6c85l"]
+width = 2048
+height = 2048
 color_ramp = SubResource("Gradient_cfl1a")
 noise = SubResource("FastNoiseLite_65i3p")
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_erf0l"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v13r6"]
-albedo_color = Color(0.0588235, 0.470588, 0.00784314, 1)
 albedo_texture = SubResource("NoiseTexture2D_6c85l")
 roughness_texture = SubResource("NoiseTexture2D_erf0l")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_v6bxa"]
+size = Vector2(16, 16)
 
 [sub_resource type="BoxMesh" id="BoxMesh_i372i"]
 
@@ -111,6 +115,29 @@ emission = Color(0.717647, 0.729412, 0.482353, 1)
 emission_energy_multiplier = 2.51
 clearcoat_enabled = true
 clearcoat_roughness = 0.23
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_gcjge"]
+size = Vector2(16, 16)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ifix3"]
+flip_faces = true
+size = Vector2(2, 8)
+orientation = 0
+
+[sub_resource type="Gradient" id="Gradient_sc4ge"]
+colors = PackedColorArray(0.211765, 0.137255, 0.0235294, 1, 0.211765, 0.105882, 0.0392157, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_obpgw"]
+noise_type = 0
+frequency = 0.1601
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5gxmf"]
+color_ramp = SubResource("Gradient_sc4ge")
+noise = SubResource("FastNoiseLite_obpgw")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_62kcl"]
+albedo_texture = SubResource("NoiseTexture2D_5gxmf")
 
 [node name="DaskerScene" type="Node3D"]
 
@@ -130,7 +157,8 @@ skeleton = NodePath("../..")
 [node name="PoseName" parent="XROrigin3D/TrackedHandLeft/Skeleton3D/XRPickupFunction" index="2"]
 visible = false
 
-[node name="ControlMenu" type="Node3D" parent="XROrigin3D/TrackedHandLeft/Skeleton3D/XRPickupFunction" index="7"]
+[node name="ControlMenu" parent="XROrigin3D/TrackedHandLeft/Skeleton3D/XRPickupFunction" index="7" instance=ExtResource("2_krmbv")]
+transform = Transform3D(0.999932, -0.00382261, -0.0112063, 0.00533372, 0.990408, 0.138074, 0.010571, -0.138123, 0.99036, -0.00430387, 0.0585655, 0.00946741)
 
 [node name="Physical Bone Thumb_Proximal_L" parent="XROrigin3D/TrackedHandLeft/Skeleton3D" index="2"]
 transform = Transform3D(0.938213, -0.077999, -0.337155, 0.0187491, 0.984294, -0.175538, 0.345551, 0.15837, 0.92494, 0.0283173, 0.0543736, -0.0544159)
@@ -245,11 +273,11 @@ script = ExtResource("3_a65ak")
 
 [node name="InnerCallibration" type="Node3D" parent="Scene/Mover"]
 
-[node name="SetPoint1" type="Node3D" parent="Scene/Mover/InnerCallibration"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.49384, 0.772001, -1.34669)
-
 [node name="SetPoint2" type="Node3D" parent="Scene/Mover/InnerCallibration"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.623, 0.772, 1.802)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.532, 0.819, 1.802)
+
+[node name="SetPoint1" type="Node3D" parent="Scene/Mover/InnerCallibration"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.53178, 0.818786, -0.797365)
 
 [node name="SetPoint3" type="Node3D" parent="Scene/Mover/InnerCallibration"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.84073, 0.770469, -1.32702)
@@ -268,13 +296,12 @@ text = "Test"
 script = ExtResource("4_wasnm")
 
 [node name="Floor" type="MeshInstance3D" parent="Scene/Mover"]
-transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_v13r6")
 mesh = SubResource("PlaneMesh_v6bxa")
 skeleton = NodePath("../../..")
 
 [node name="Lamp" type="MeshInstance3D" parent="Scene/Mover"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -3.53444, 0, -2.5389)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -3.53045, 0.0327241, -2.50964)
 mesh = ExtResource("6_fjxos")
 skeleton = NodePath("../../..")
 
@@ -286,7 +313,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_0p1ai")
 [node name="OmniLight3D" type="OmniLight3D" parent="Scene/Mover/Lamp/MeshInstance3D"]
 
 [node name="Lamp2" type="MeshInstance3D" parent="Scene/Mover"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1.61222, 0.0639257, 1.29334)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 3.92748, 0.0639258, 2.68352)
 mesh = ExtResource("6_fjxos")
 skeleton = NodePath("../Lamp")
 
@@ -368,152 +395,152 @@ mesh = ExtResource("11_8bjxc")
 skeleton = NodePath("")
 
 [node name="NewChair12" type="MeshInstance3D" parent="Scene/Mover"]
-transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -2.8867, 0.51135, 0.463794)
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -2.8867, 0.51135, 0.503046)
 mesh = ExtResource("11_8bjxc")
 skeleton = NodePath("")
 
 [node name="NewChair13" type="MeshInstance3D" parent="Scene/Mover"]
-transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -2.33768, 0.51135, 0.463794)
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -2.33768, 0.51135, 0.503046)
 mesh = ExtResource("11_8bjxc")
 skeleton = NodePath("")
 
 [node name="NewChair14" type="MeshInstance3D" parent="Scene/Mover"]
-transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -1.76113, 0.51135, 0.463794)
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -1.76113, 0.51135, 0.503046)
 mesh = ExtResource("11_8bjxc")
 skeleton = NodePath("")
 
 [node name="NewTable3" type="MeshInstance3D" parent="Scene/Mover"]
-transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -2.629, 0.75, 0.231525)
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -2.629, 0.75, 0.472576)
 mesh = ExtResource("12_6xljh")
 skeleton = NodePath("")
 
 [node name="NewChair15" type="MeshInstance3D" parent="Scene/Mover"]
-transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -3.49232, 0.51135, 0.463794)
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -3.49232, 0.51135, 0.503046)
 mesh = ExtResource("11_8bjxc")
 skeleton = NodePath("")
 
 [node name="NewChair16" type="MeshInstance3D" parent="Scene/Mover"]
-transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -0.354223, 0.51135, 0.4619)
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -0.354223, 0.51135, 0.501152)
 mesh = ExtResource("11_8bjxc")
 skeleton = NodePath("")
 
 [node name="NewChair17" type="MeshInstance3D" parent="Scene/Mover"]
-transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 0.194804, 0.51135, 0.4619)
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 0.194804, 0.51135, 0.501152)
 mesh = ExtResource("11_8bjxc")
 skeleton = NodePath("")
 
 [node name="NewChair18" type="MeshInstance3D" parent="Scene/Mover"]
-transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 0.77135, 0.51135, 0.4619)
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 0.77135, 0.51135, 0.501152)
 mesh = ExtResource("11_8bjxc")
 skeleton = NodePath("")
 
 [node name="NewTable4" type="MeshInstance3D" parent="Scene/Mover"]
-transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -0.0965202, 0.75, 0.22963)
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -0.0965202, 0.75, 0.470681)
 mesh = ExtResource("12_6xljh")
 skeleton = NodePath("")
 
 [node name="NewChair19" type="MeshInstance3D" parent="Scene/Mover"]
-transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -0.959841, 0.51135, 0.4619)
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -0.959841, 0.51135, 0.501152)
 mesh = ExtResource("11_8bjxc")
 skeleton = NodePath("")
 
 [node name="NewChair20" type="MeshInstance3D" parent="Scene/Mover"]
-transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 2.10577, 0.51135, 0.455366)
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 2.10577, 0.51135, 0.541266)
 mesh = ExtResource("11_8bjxc")
 skeleton = NodePath("")
 
 [node name="NewChair21" type="MeshInstance3D" parent="Scene/Mover"]
-transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 2.6548, 0.51135, 0.455366)
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 2.6548, 0.51135, 0.541266)
 mesh = ExtResource("11_8bjxc")
 skeleton = NodePath("")
 
 [node name="NewChair22" type="MeshInstance3D" parent="Scene/Mover"]
-transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 3.23135, 0.51135, 0.455366)
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 3.23135, 0.51135, 0.541266)
 mesh = ExtResource("11_8bjxc")
 skeleton = NodePath("")
 
 [node name="NewTable5" type="MeshInstance3D" parent="Scene/Mover"]
-transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 2.36348, 0.75, 0.223096)
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 2.36348, 0.75, 0.476628)
 mesh = ExtResource("12_6xljh")
 skeleton = NodePath("")
 
 [node name="NewChair23" type="MeshInstance3D" parent="Scene/Mover"]
-transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 1.50015, 0.51135, 0.455366)
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 1.50015, 0.51135, 0.541266)
 mesh = ExtResource("11_8bjxc")
 skeleton = NodePath("")
 
 [node name="NewChair24" type="MeshInstance3D" parent="Scene/Mover"]
-transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -2.8867, 0.51135, -1.10064)
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -2.8867, 0.51135, -0.742241)
 mesh = ExtResource("11_8bjxc")
 skeleton = NodePath("")
 
 [node name="NewChair25" type="MeshInstance3D" parent="Scene/Mover"]
-transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -2.33768, 0.51135, -1.10064)
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -2.33768, 0.51135, -0.742241)
 mesh = ExtResource("11_8bjxc")
 skeleton = NodePath("")
 
 [node name="NewChair26" type="MeshInstance3D" parent="Scene/Mover"]
-transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -1.76113, 0.51135, -1.10064)
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -1.76113, 0.51135, -0.742241)
 mesh = ExtResource("11_8bjxc")
 skeleton = NodePath("")
 
 [node name="NewTable6" type="MeshInstance3D" parent="Scene/Mover"]
-transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -2.629, 0.75, -1.33291)
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -2.629, 0.75, -0.785071)
 mesh = ExtResource("12_6xljh")
 skeleton = NodePath("")
 
 [node name="NewChair27" type="MeshInstance3D" parent="Scene/Mover"]
-transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -3.49232, 0.51135, -1.10064)
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -3.49232, 0.51135, -0.742241)
 mesh = ExtResource("11_8bjxc")
 skeleton = NodePath("")
 
 [node name="NewChair28" type="MeshInstance3D" parent="Scene/Mover"]
-transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -0.423407, 0.51135, -1.1014)
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -0.423407, 0.51135, -0.743001)
 mesh = ExtResource("11_8bjxc")
 skeleton = NodePath("")
 
 [node name="NewChair29" type="MeshInstance3D" parent="Scene/Mover"]
-transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 0.125621, 0.51135, -1.1014)
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 0.125621, 0.51135, -0.743001)
 mesh = ExtResource("11_8bjxc")
 skeleton = NodePath("")
 
 [node name="NewChair30" type="MeshInstance3D" parent="Scene/Mover"]
-transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 0.702166, 0.51135, -1.1014)
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 0.702166, 0.51135, -0.743001)
 mesh = ExtResource("11_8bjxc")
 skeleton = NodePath("")
 
 [node name="NewTable7" type="MeshInstance3D" parent="Scene/Mover"]
-transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -0.165704, 0.75, -1.33367)
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -0.165704, 0.75, -0.785831)
 mesh = ExtResource("12_6xljh")
 skeleton = NodePath("")
 
 [node name="NewChair31" type="MeshInstance3D" parent="Scene/Mover"]
-transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -1.02902, 0.51135, -1.1014)
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, -1.02902, 0.51135, -0.743001)
 mesh = ExtResource("11_8bjxc")
 skeleton = NodePath("")
 
 [node name="NewChair32" type="MeshInstance3D" parent="Scene/Mover"]
-transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 2.03343, 0.51135, -1.10984)
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 2.03343, 0.51135, -0.700983)
 mesh = ExtResource("11_8bjxc")
 skeleton = NodePath("")
 
 [node name="NewChair33" type="MeshInstance3D" parent="Scene/Mover"]
-transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 2.58246, 0.51135, -1.10984)
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 2.58246, 0.51135, -0.700983)
 mesh = ExtResource("11_8bjxc")
 skeleton = NodePath("")
 
 [node name="NewChair34" type="MeshInstance3D" parent="Scene/Mover"]
-transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 3.159, 0.51135, -1.10984)
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 3.159, 0.51135, -0.700983)
 mesh = ExtResource("11_8bjxc")
 skeleton = NodePath("")
 
 [node name="NewTable8" type="MeshInstance3D" parent="Scene/Mover"]
-transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 2.29113, 0.75, -1.34211)
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 2.291, 0.75, -0.784)
 mesh = ExtResource("12_6xljh")
 skeleton = NodePath("")
 
 [node name="NewChair35" type="MeshInstance3D" parent="Scene/Mover"]
-transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 1.42781, 0.51135, -1.10984)
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 1.42781, 0.51135, -0.700983)
 mesh = ExtResource("11_8bjxc")
 skeleton = NodePath("")
 
@@ -527,10 +554,20 @@ transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.5099
 mesh = ExtResource("11_8bjxc")
 skeleton = NodePath("../../..")
 
+[node name="Ceiling" type="MeshInstance3D" parent="Scene/Mover"]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 2.64364, 0)
+mesh = SubResource("PlaneMesh_gcjge")
+
+[node name="Door" type="MeshInstance3D" parent="Scene/Mover"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.37982, 1.03627, -2.57157)
+mesh = SubResource("PlaneMesh_ifix3")
+surface_material_override/0 = SubResource("StandardMaterial3D_62kcl")
+
 [node name="StartXR" parent="." instance=ExtResource("13_7gu1i")]
 
 [connection signal="new_pose" from="XROrigin3D/TrackedHandLeft/Skeleton3D/XRPickupFunction/HandPoseMatcher" to="Scene" method="_on_left_hand_pose_matcher_new_pose"]
 [connection signal="new_pose" from="XROrigin3D/TrackedHandLeft/Skeleton3D/XRPickupFunction/HandPoseMatcher" to="Scene/Mover/Folding_Table" method="_on_left_hand_pose_matcher_new_pose"]
+[connection signal="calibrate" from="XROrigin3D/TrackedHandLeft/Skeleton3D/XRPickupFunction/ControlMenu" to="Scene" method="on_calibrate_pressed"]
 [connection signal="new_pose" from="XROrigin3D/TrackedHandRight/Skeleton3D/XRPickupFunction/HandPoseMatcher" to="Scene" method="_on_right_hand_pose_matcher_new_pose"]
 [connection signal="new_pose" from="XROrigin3D/TrackedHandRight/Skeleton3D/XRPickupFunction/HandPoseMatcher" to="Scene/Mover/Folding_Table" method="_on_right_hand_pose_matcher_new_pose"]
 [connection signal="moved" from="Scene/Mover/Folding_Table" to="Scene/Mover/Folding_Table/Label3D" method="_on_folding_table_moved"]
